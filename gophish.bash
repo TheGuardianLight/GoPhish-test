@@ -4,20 +4,15 @@ if [ $EUID -ne 0 ]; then
     exit 1
 fi
 
-# Mise à jour des paquets
-apt update && apt upgrade -y
+# Mise à jour des paquets et installation des dépendances
+apt update && apt upgrade -y && apt install golang mysql-server -y
 
-# Installation de Go
-apt install golang -y
 
 # Installation de GoPhish
 cd /var/www
 mkdir gophish
 wget https://github.com/gophish/gophish/releases/download/v0.12.1/gophish-v0.12.1-linux-64bit.zip
 unzip gophish-v0.12.1-linux-64bit.zip
-
-# Installation de MySQL
-apt install mysql-server -y
 
 # Création de la base de données
 mysql -u root -e "CREATE DATABASE gophish;"
@@ -47,5 +42,3 @@ echo "Description=GoPhish Service" >> gophish.service
 echo "After=network.target" >> gophish.service
 echo "" >> gophish.service
 echo "[Service]" >> gophish.service
-
-#

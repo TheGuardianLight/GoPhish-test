@@ -38,26 +38,26 @@ read ip_phish
 echo "Voulez vous utiliser un certificat SSL pour votre serveur d'administration ? (y/n)"
 read admin_ssl
 if [ $admin_ssl = "y" ]; then
-    $admin_ssl_use = "true"
+    admin_ssl_use = "true"
     echo "Veuillez entrer le chemin vers votre certificat SSL :"
     read admin_cert
     echo "Veuillez entrer le chemin vers votre clé SSL :"
     read admin_key
     else
     echo "Vous n'utiliserez pas de certificat SSL"
-    $admin_ssl_use = "false"
+    admin_ssl_use = "false"
 fi
 echo "Voulez vous utiliser un certificat SSL pour votre serveur de phishing ? (y/n)"
 read phish_ssl
 if [ $ssl = "y" ]; then
-    $phish_ssl_use = "true"
+    phish_ssl_use = "true"
     echo "Veuillez entrer le chemin vers votre certificat SSL :"
     read phish_cert
     echo "Veuillez entrer le chemin vers votre clé SSL :"
     read phish_key
     else
     echo "Vous n'utiliserez pas de certificat SSL"
-    $phish_ssl_use = "false"
+    phish_ssl_use = "false"
 fi
 
 # Création du fichier de configuration

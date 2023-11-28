@@ -30,6 +30,66 @@ echo "Arrêt du service d'Apache et désactivation..."
 systemctl stop apache2
 systemctl mask apache2
 
+# Question sur la configuration du serveur
+echo "Veuillez entrer l'adresse IP de votre serveur d'Administration GoPhish :"
+read ip_admin
+echo "Veuillez entrer l'adresse IP de votre serveur de Phishing GoPhish :"
+read ip_phish
+echo "Voulez vous utiliser un certificat SSL pour votre serveur d'administration ? (y/n)"
+read admin_ssl
+if [ $admin_ssl = "y" ]; then
+    $admin_ssl_use = "true"
+    echo "Veuillez entrer le chemin vers votre certificat SSL :"
+    read admin_cert
+    echo "Veuillez entrer le chemin vers votre clé SSL :"
+    read admin_key
+    else
+    echo "Vous n'utiliserez pas de certificat SSL"
+    $admin_ssl_use = "false"
+fi
+echo "Voulez vous utiliser un certificat SSL pour votre serveur de phishing ? (y/n)"
+read phish_ssl
+if [ $ssl = "y" ]; then
+    $phish_ssl_use = "true"
+    echo "Veuillez entrer le chemin vers votre certificat SSL :"
+    read phish_cert
+    echo "Veuillez entrer le chemin vers votre clé SSL :"
+    read phish_key
+    else
+    echo "Vous n'utiliserez pas de certificat SSL"
+    $phish_ssl_use = "false"
+fi
+
+# Création du fichier de configuration
+echo "Création du fichier de configuration..."
+cd /opt/gophish
+touch config.json
+cat << EOF > config.json
+{
+    "admin_server": {
+        "listen_url": "$ip_admin:3333",
+        "use_tls": $admin_ssl_use,
+        "cert_path": "$admin_cert",
+        "key_path": "$admin_key",
+        "trusted_origins": []
+    },
+    "phish_server": {
+        "listen_url": "$ip_phish:80",
+        "use_tls": $phish_ssl_use,
+        "cert_path": "$phish_cert",
+        "key_path": "$phish_key"
+    },
+    "db_name": "gophish",
+    "db_path": "gophish.db",
+    "migrations_prefix": "db/db_",
+    "contact_address": "",
+    "logging": {
+        "filename": "",
+        "level": ""
+    }
+}
+EOF
+
 # Met à jours les permissions du fichier de configuration
 echo "Mise à jour des permissions du fichier de configuration..."
 chmod 0640 /opt/gophish/config.json

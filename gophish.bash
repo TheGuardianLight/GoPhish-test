@@ -148,4 +148,4 @@ systemctl enable --now gophish
 
 
 echo "Installation de GoPhish terminée !"
-echo "Pour lancer GoPhish, faites cd /opt/gophish puis ./gophish ."
+echo "Pour lancer GoPhish, utilisez la commande 'systemctl start gophish'"

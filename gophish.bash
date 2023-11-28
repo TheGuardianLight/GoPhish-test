@@ -27,19 +27,7 @@ unzip gophish-v0.12.1-linux-64bit.zip -d /opt/gophish
 
 # Création et configuration de la base de données
 echo "Création et configuration de la base de données sqlite..."
-
-# Création de la base de données
-echo "Création de la base de données..."
 cd /opt/gophish
-sqlite3 gophish.db
-
-# echo "[mysqld]" >> /etc/mysql/mysql.cnf
-# echo "sql_mode=ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" >> /etc/mysql/mysql.cnf
-
-# mysql -u root -e "CREATE DATABASE gophish;"
-# mysql -u root -e "CREATE USER 'gophish'@'localhost' IDENTIFIED BY 'gophish';"
-# mysql -u root -e "GRANT ALL PRIVILEGES ON gophish.* TO 'gophish'@'localhost';"
-# mysql -u root -e "FLUSH PRIVILEGES;"
 
 # Arrête le service d'Apache et le désactive
 echo "Arrêt du service d'Apache et désactivation..."

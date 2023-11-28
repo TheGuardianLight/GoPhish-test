@@ -62,6 +62,7 @@ fi
 
 # Création du fichier de configuration
 echo "Création du fichier de configuration..."
+rm /opt/gophish/config.json
 cd /opt/gophish
 touch config.json
 cat << EOF > config.json

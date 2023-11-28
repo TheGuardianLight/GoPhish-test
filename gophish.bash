@@ -36,23 +36,21 @@ chmod 0640 /opt/gophish/config.json
 
 # Démarrage de GoPhish
 echo "Démarrage de GoPhish..."
+echo "Note: Lors du premier démarrage, le nom d'utilisateur et le mot de passe seront indiqué dans les lignes suivantes."
+echo "Une fois le mot de passe changé, faites ctrl + c pour arrêter GoPhish et continuer le script."
+echo "Notez également que le serveur tournera en local. Vous devrez modifier le fichier config.json à votre guise par la suite."
 cd /opt/gophish
 chmod +x gophish
 ./gophish
 
-# Vérifie que GoPhish est lancé
-echo "Vérification que GoPhish est lancé..."
-netstat -al | grep 3333
-curl http://localhost:3333
-
 # Création du service GoPhish
-echo "Création du service GoPhish..."
-cd /etc/systemd/system
-touch gophish.service
-echo "[Unit]" >> gophish.service
-echo "Description=GoPhish Service" >> gophish.service
-echo "After=network.target" >> gophish.service
-echo "" >> gophish.service
-echo "[Service]" >> gophish.service
+# echo "Création du service GoPhish..."
+# cd /etc/systemd/system
+# touch gophish.service
+# echo "[Unit]" >> gophish.service
+# echo "Description=GoPhish Service" >> gophish.service
+# echo "After=network.target" >> gophish.service
+# echo "" >> gophish.service
+# echo "[Service]" >> gophish.service
 
-echo "Installation terminée !"
+echo "Installation de GoPhish terminée !"

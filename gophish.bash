@@ -48,3 +48,4 @@ echo "After=network.target" >> gophish.service
 echo "" >> gophish.service
 echo "[Service]" >> gophish.service
 
+#

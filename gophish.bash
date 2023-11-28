@@ -134,7 +134,7 @@ User=gophish
 Environment='STDOUT=/var/log/gophish/gophish.log'
 Environment='STDERR=/var/log/gophish/gophish.log'
 PIDFile=/var/run/gophish
-ExecStart=/bin/sh -c "/opt/gophish/gophish >>${STDOUT} 2>>${STDERR}"
+ExecStart=/bin/sh -c "/opt/gophish/gophish"
 
 [Install]
 WantedBy=multi-user.target

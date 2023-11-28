@@ -118,14 +118,34 @@ chmod +x gophish
 ./gophish
 
 # Création du service GoPhish
-# echo "Création du service GoPhish..."
-# cd /etc/systemd/system
-# touch gophish.service
-# echo "[Unit]" >> gophish.service
-# echo "Description=GoPhish Service" >> gophish.service
-# echo "After=network.target" >> gophish.service
-# echo "" >> gophish.service
-# echo "[Service]" >> gophish.service
+echo "Création du service GoPhish..."
+useradd -r gophish -M -d /opt/gophish/
+cd /etc/systemd/system
+touch gophish.service
+cat << EOF > gophish.service
+[Unit]
+Description=Gophish, an open-source phishing toolkit
+Documentation=https://getgophish.com/documentation/
+After=network.target
+
+[Service]
+WorkingDirectory=/opt/gophish
+User=gophish
+Environment='STDOUT=/var/log/gophish/gophish.log'
+Environment='STDERR=/var/log/gophish/gophish.log'
+PIDFile=/var/run/gophish
+ExecStart=/bin/sh -c "/opt/gophish/gophish >>${STDOUT} 2>>${STDERR}"
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+mkdir /var/log/gophish
+chown -R gophish:gophish /opt/gophish/ /var/log/gophish/
+setcap cap_net_bind_service=+ep /opt/gophish/gophish
+systemctl daemon-reload
+systemctl enable --now gophish
+
 
 echo "Installation de GoPhish terminée !"
 echo "Pour lancer GoPhish, faites cd /opt/gophish puis ./gophish ."

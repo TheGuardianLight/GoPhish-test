@@ -10,10 +10,11 @@ fi
 echo "Voulez vous mettre à jour les paquets avant d'installer les dépendances de GoPhish ? (y/n)"
 read update
 if [ $update = "y" ]; then
-    echo "Mise à jour des paquets..."
+    echo "Mise à jour des paquets puis installation des dépendances..."
     apt update && apt upgrade -y && apt install golang mysql-server apache2 zip curl -y
     else
-    echo "Vous n'avez pas choisi de mettre à jour les paquets"
+    echo "Vous n'avez pas choisi de mettre à jour les paquets."
+    echo "Installation des dépendances..."
     apt install golang mysql-server apache2 zip curl -y
 fi
 

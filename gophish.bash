@@ -5,7 +5,7 @@ if [ $EUID -ne 0 ]; then
 fi
 
 # Mise à jour des paquets et installation des dépendances
-apt update && apt upgrade -y && apt install golang mysql-server -y
+apt update && apt upgrade -y && apt install golang mysql-server apache2 -y
 
 
 # Installation de GoPhish

@@ -66,6 +66,8 @@ if [ $ssl = "y" ]; then
     echo "Vous n'utiliserez pas de certificat SSL"
     phish_ssl_use=false
 fi
+echo "Veuillez entrer une adresse mail de contact :"
+read contact_mail
 
 # Création du fichier de configuration
 echo "Création du fichier de configuration..."
@@ -90,10 +92,10 @@ cat << EOF > config.json
     "db_name": "gophish",
     "db_path": "gophish.db",
     "migrations_prefix": "db/db_",
-    "contact_address": "",
+    "contact_address": "$contact_mail",
     "logging": {
-        "filename": "",
-        "level": ""
+        "filename": "gophish.log",
+        "level": "error"
     }
 }
 EOF

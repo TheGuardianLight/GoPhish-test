@@ -18,8 +18,12 @@ mkdir gophish
 wget https://github.com/gophish/gophish/releases/download/v0.12.1/gophish-v0.12.1-linux-64bit.zip
 unzip gophish-v0.12.1-linux-64bit.zip -d /opt/gophish
 
-# Création de la base de données
-echo "Création de la base de données..."
+# Création et configuration de la base de données
+echo "Création et configuration de la base de données..."
+
+echo "[mysqld]" >> /etc/mysql/mysql.cnf
+echo "sql_mode=ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" >> /etc/mysql/mysql.cnf
+
 mysql -u root -e "CREATE DATABASE gophish;"
 mysql -u root -e "CREATE USER 'gophish'@'localhost' IDENTIFIED BY 'gophish';"
 mysql -u root -e "GRANT ALL PRIVILEGES ON gophish.* TO 'gophish'@'localhost';"
@@ -89,8 +93,8 @@ cat << EOF > config.json
         "cert_path": "$phish_cert",
         "key_path": "$phish_key"
     },
-    "db_name": "gophish",
-    "db_path": "gophish.db",
+    "db_name": "mysql",
+    "db_path": "gophish:@(:3306)/gophish?charset=utf8&parseTime=True&loc=UTC",
     "migrations_prefix": "db/db_",
     "contact_address": "$contact_mail",
     "logging": {

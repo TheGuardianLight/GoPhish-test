@@ -54,3 +54,4 @@ chmod +x gophish
 # echo "[Service]" >> gophish.service
 
 echo "Installation de GoPhish terminée !"
+echo "Pour lancer GoPhish, faites cd /opt/gophish puis ./gophish & pour le lancer en arrière-plan."

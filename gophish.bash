@@ -15,7 +15,7 @@ if [ $update = "y" ]; then
     else
     echo "Vous n'avez pas choisi de mettre à jour les paquets."
     echo "Installation des dépendances..."
-    apt install golang mysql-server apache2 zip curl -y
+    apt install golang sqlite3 apache2 zip curl -y
 fi
 
 # Installation de GoPhish
@@ -60,7 +60,7 @@ if [ $admin_ssl = "y" ]; then
 fi
 echo "Voulez vous utiliser un certificat SSL pour votre serveur de phishing ? (y/n)"
 read phish_ssl
-if [ $ssl = "y" ]; then
+if [ $phish_ssl = "y" ]; then
     phish_ssl_use=true
     echo "Veuillez entrer le chemin vers votre certificat SSL :"
     read phish_cert
